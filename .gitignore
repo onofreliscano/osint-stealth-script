@@ -1,0 +1,18 @@
+# Forensic evidence and logs (ISO/IEC 27037)
+evidence/
+*.cast
+*.log
+*.headers
+*.sha256
+
+# System & OS artifacts
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker local state
+*.tmp
