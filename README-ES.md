@@ -15,6 +15,12 @@ Framework de despliegue automatizado para entornos de investigación de Intelige
 
 Diseñado bajo estricto cumplimiento de estándares internacionales de seguridad operativa (OPSEC) y preservación de evidencia digital.
 
+
+
+<div align="center">
+  <video src="assets/demo.mp4" width="100%" controls autoplay loop muted></video>
+</div>
+
 ---
 
 ## Visión General de la Arquitectura

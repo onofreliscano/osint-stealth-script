@@ -5,7 +5,7 @@
 [![OPSEC: NATO AJP--2.1](https://img.shields.io/badge/OPSEC-NATO%20AJP--2.1-red.svg)](#)
 [![Platform: macOS](https://img.shields.io/badge/Platform-macOS%20Apple%20Silicon-lightgrey.svg)](#)
 
-[Leer en Español 🇪🇸](README-ES.md) 
+[Leer en Español 🇻🇪](README-ES.md) 
 
  [Technical Architecture](ARCHITECTURE.md) 
 
@@ -14,6 +14,10 @@
 Automated deployment framework for high-security, forensically sound Open Source Intelligence (OSINT) research environments on GNU/Linux and macOS (Apple Intel & Silicon) using **Colima** and **Debian Bookworm**.
 
 Designed in strict compliance with international operational security (OPSEC) and digital evidence preservation standards.
+
+<div align="center">
+  <video src="assets/demo.mp4" width="100%" controls autoplay loop muted></video>
+</div>
 
 ---
 
@@ -28,7 +32,6 @@ Host Platform (macOS / Colima VM | GNU/Linux Native)
          ├── raw_data/ (Downloaded artifacts + SHA-256 hashes)
          ├── proofs/   (Captures, headers, metadata)
          └── logs/     (asciinema .cast sessions & script .log text records) 
-       
 ```
 
 ---
@@ -38,7 +41,9 @@ Host Platform (macOS / Colima VM | GNU/Linux Native)
 ### Prerequisites
 
 * **macOS (Apple Silicon / Intel)**
+  
   * with **[Homebrew](https://brew.sh/)** installed.
+  
   * **Colima** & **Docker CLI**:
     
     ```bash
@@ -55,12 +60,11 @@ Host Platform (macOS / Colima VM | GNU/Linux Native)
         sudo apt update && sudo apt install -y docker.io
         sudo systemctl enable --now docker
         sudo usermod -aG docker $USER
-        
+    
     # Arch Linux
         sudo pacman -S docker
         sudo systemctl enable --now docker
         sudo usermod -aG docker $USER    
-    
     ```
 
 ---
