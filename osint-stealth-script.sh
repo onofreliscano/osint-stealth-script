@@ -62,11 +62,21 @@ docker run -d \
   debian:bookworm-slim sleep infinity >/dev/null
 
 # Internal dependencies provisioning
+#echo "[✓] Installing operational packages (Tor, Proxychains4, Curl, JQ, Sudo)..."
+#docker exec "${CONTAINER_NAME}" bash -c \
+#	"find /etc/apt/ -type f -exec sed -i 's|deb.debian.org|cdn-fastly.deb.debian.org|g' {} + 2>/dev/null || true && \
+#   apt-get update && \
+#   apt-get install -y --no-install-recommends tor proxychains4 curl less neovim ncurses-term jq bat tmux exiftool sudo git python3 python3-pip python3-bs4 ca-certificates openssl dnsutils whois nano neofetch xclip trash-cli secure-delete asciinema util-linux" >/dev/null 2>&1
+
+# Internal dependencies provisioning
 echo "[✓] Installing operational packages (Tor, Proxychains4, Curl, JQ, Sudo)..."
 docker exec "${CONTAINER_NAME}" bash -c \
-  "apt-get update && apt-get install -y --no-install-recommends tor proxychains4 curl less neovim ncurses-term jq bat tmux exiftool sudo git python3 python3-pip python3-bs4 ca-certificates openssl dnsutils whois nano neofetch xclip trash-cli secure-delete asciinema w3m links2 util-linux" >/dev/null 2>&1
+  "find /etc/apt/ -type f -exec sed -i 's|deb.debian.org|cdn-fastly.deb.debian.org|g' {} + 2>/dev/null || true && \
+   apt-get update -o Acquire::http::Timeout=\"10\" && \
+   apt-get install -y --no-install-recommends --fix-missing -o Acquire::http::Timeout=\"10\" tor proxychains4 curl less neovim ncurses-term jq bat tmux exiftool sudo git python3 python3-pip python3-bs4 ca-certificates openssl dnsutils whois nano neofetch xclip trash-cli secure-delete asciinema util-linux" >/dev/null 2>&1
 
 echo " "
+
 echo " =============================================================================="
 echo " SECTION 1: OPSEC Doctrines & Network Egress (NATO AJP-2.1)"
 echo " =============================================================================="
@@ -89,12 +99,26 @@ docker exec "${CONTAINER_NAME}" bash -c \
 
 echo "[*] 1.2. Active Tor Daemon (Port 9050 listening)"
 #docker exec "${CONTAINER_NAME}" bash -c "service tor start" >/dev/null 2>&1
-docker exec "${CONTAINER_NAME}" bash -c "service tor restart" >/dev/null 2>&1
+#docker exec "${CONTAINER_NAME}" bash -c "service tor restart" >/dev/null 2>&1
+
+docker exec "${CONTAINER_NAME}" bash -c "killall -9 tor 2>/dev/null || true; service tor start" >/dev/null 2>&1
+
+# Telemetry Verification & Forensics Directory (NIST SP 800-53 / ISO 27037)
+#echo "[✓] Verifying egress network isolation via Tor circuit..."
+#sleep 10
 
 # Telemetry Verification & Forensics Directory (NIST SP 800-53 / ISO 27037)
 
 echo "[✓] Verifying egress network isolation via Tor circuit..."
-sleep 10
+docker exec "${CONTAINER_NAME}" bash -c '
+  for i in {1..15}; do
+    if proxychains4 curl -s --max-time 3 https://check.torproject.org/api/ip 2>/dev/null | grep -q "IsTor"; then
+      exit 0
+    fi
+    sleep 1
+  done
+  exit 1
+' >/dev/null 2>&1
 
 echo "[*] 1.3. DNS Leak Test (Preventing out-of-tunnel DNS queries)"
 echo "[*] 1.4. User-Agent Spoofing (Corporate/Analyst masquerade configured)"
