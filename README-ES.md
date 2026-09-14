@@ -1,4 +1,4 @@
-# Desplegador de Entorno Stealth para OSINT Forense
+# Gestor de Despliegue para Entornos OSINT Forenses
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 ![Compliance: ISO/IEC 27037](https://img.shields.io/badge/Compliance-ISO%2FIEC%2027037-blue.svg)
