@@ -15,10 +15,8 @@ Automated deployment framework for high-security, forensically sound Open Source
 
 Designed in strict compliance with international operational security (OPSEC) and digital evidence preservation standards.
 
-<div align="center">
-  <video src="assets/demo.mp4" width="100%" controls autoplay loop muted></video>
-</div>
 
+<video src="https://github.com/user-attachments/assets/873a3561-01d8-4674-bddd-19db3e8eb923" controls width="100%"></video>
 ---
 
 ## Architecture Overview
