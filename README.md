@@ -25,18 +25,20 @@ Host Platform (macOS / Colima VM | GNU/Linux Native)
      ├── Routing: Proxychains4 -> Tor Daemon (Port 9050)
      ├── Execution: Non-root user 'analyst' (Tmux multiplexer)
      └── Evidence Tree: /home/analyst/evidence/
-         ├── raw_data/  (Downloaded artifacts + SHA-256 hashes)
-         ├── proofs/    (Captures, headers, metadata)
-         └── logs/      (asciinema .cast sessions & script .log text records) 
+         ├── raw_data/ (Downloaded artifacts + SHA-256 hashes)
+         ├── proofs/   (Captures, headers, metadata)
+         └── logs/     (asciinema .cast sessions & script .log text records) 
        
 ```
+
+---
 
 ## Quick Start
 
 ### Prerequisites
 
 * **macOS (Apple Silicon / Intel)**
-  * with **Homebrew** installed.
+  * with **[Homebrew](https://brew.sh/)** installed.
   * **Colima** & **Docker CLI**:
     
     ```bash
@@ -61,8 +63,30 @@ Host Platform (macOS / Colima VM | GNU/Linux Native)
     
     ```
 
+---
+
 ## Deployment
 
-1. Make the script executable: 
+1. **Grant execution permissions to the script:**
 
-     chmod +x osint-stealth-script.sh
+```
+chmod +x osint-stealth-script.sh
+```
+
+2. **Deploy the stealth node:**
+
+```
+./osint-stealth-script.sh
+```
+
+---
+
+## Destruction & Secure Purge
+
+Destroy the container and wipe all ephemeral traces: 
+
+```
+./osint-stealth-script.sh --purge
+
+./osint-stealth-script.sh -p
+```
